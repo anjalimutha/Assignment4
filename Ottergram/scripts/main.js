@@ -49,8 +49,21 @@ function SetDetailKey(x, y) {
 
 }
 
+function addThumbKeyHandler(thumb, i) {
+    'use strict';
+    var index = i;
+    document.body.addEventListener('keyup', function(event) {
+        event.preventDefault();
+        console.log(event.keyCode);
+        if (event.keyCode == (KEY1 + index)) {
 
-function SetDetailImageByKeypad() {
+            setDetailsFromThumb(thumb);
+            showDetails();
+        }
+    });
+}
+
+/*function SetDetailImageByKeypad() {
     'use strict';
     document.body.addEventListener('keyup', function(event) {
         event.preventDefault();
@@ -81,7 +94,7 @@ function SetDetailImageByKeypad() {
 
         }
     });
-}
+}*/
 
 function addThumbClickHandler(thumb) {
     'use strict';
