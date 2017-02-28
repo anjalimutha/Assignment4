@@ -5,8 +5,8 @@ var THUMBNAIL_LINK_SELECTOR = '[data-image-role="trigger"]';
 var HIDDEN_DETAIL_CLASS = 'hidden-detail';
 var TINY_EFFECT_CLASS = 'is-tiny';
 var ESC_KEY = 27;
-var TITLE_ARRAY = ['Stayin\' Alive', 'How Deep Is Your Love', 'You Should Be Dancing', 'Night Fever', 'To Love Somebody'];
 
+var KEY1 = 49;
 
 function setDetails(imageUrl, titleText) {
     'use strict';
@@ -32,23 +32,6 @@ function setDetailsFromThumb(thumbnail) {
     setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail));
 }
 
-function GetDetailKey(img, tit) {
-    'use strict';
-    for (var i = 0; i < document.getElementsByClassName('thumbnail-image').length; i++) {
-        if (document.getElementsByClassName('thumbnail-image')[i].alt === img + '') {
-            SetDetailKey(img, tit);
-        }
-    }
-}
-
-function SetDetailKey(x, y) {
-    'use strict';
-
-    document.querySelector(DETAIL_IMAGE_SELECTOR).src = 'http://localhost:3000/img/otter' + x + '.jpg';
-    document.querySelector(DETAIL_TITLE_SELECTOR).innerHTML = TITLE_ARRAY[y - 1];
-
-}
-
 function addThumbKeyHandler(thumb, i) {
     'use strict';
     var index = i;
@@ -60,48 +43,6 @@ function addThumbKeyHandler(thumb, i) {
             setDetailsFromThumb(thumb);
             showDetails();
         }
-    });
-}
-
-/*function SetDetailImageByKeypad() {
-    'use strict';
-    document.body.addEventListener('keyup', function(event) {
-        event.preventDefault();
-        var x = event.keyCode;
-        console.log(event.keyCode);
-        switch (x) {
-        case x = 49:
-            GetDetailKey(1, 1);
-            break;
-        case x = 50:
-            GetDetailKey(2, 2);
-            break;
-        case x = 51:
-            GetDetailKey(3, 3);
-            break;
-        case x = 52:
-            GetDetailKey(4, 4);
-            break;
-        case x = 53:
-            GetDetailKey(5, 5);
-            break;
-        case x = 54:
-            GetDetailKey(6, 6);
-            break;
-        case x = 55:
-            GetDetailKey(7, 7);
-            break;
-
-        }
-    });
-}*/
-
-function addThumbClickHandler(thumb) {
-    'use strict';
-    thumb.addEventListener('click', function(event) {
-        event.preventDefault();
-        setDetailsFromThumb(thumb);
-        showDetails();
     });
 }
 
@@ -142,8 +83,8 @@ function addKeyPressHandler() {
 function initializeEvents() {
     'use strict';
     var thumbnails = getThumbnailsArray();
-    thumbnails.forEach(addThumbClickHandler);
+    thumbnails.forEach(addThumbKeyHandler);
     addKeyPressHandler();
-    SetDetailImageByKeypad();
+
 }
 initializeEvents();
